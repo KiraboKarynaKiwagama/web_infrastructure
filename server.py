@@ -1,8 +1,8 @@
-#Tool for running a basic web server (the "shop" and the "clerk")
+#tool for running a basic web server (the "shop" and the "clerk")
 from http.server import BaseHTTPRequestHandler, HTTPServer
-#Tools for breaking a URL like "/add?a=5&b=3" into usable pieces
+#tools for breaking a URL like "/add?a=5&b=3" into usable pieces
 from urllib.parse import urlparse, parse_qs
-#Tool for converting a Python dictionary into JSON text
+#tool for converting a Python dictionary into JSON text
 import json
 
 
@@ -21,17 +21,14 @@ class MyHandler(BaseHTTPRequestHandler):
     # Python calls this automatically whenever a GET request arrives.
     def do_GET(self):
 
-        # self.path is just a raw string, e.g. "/add?a=5&b=3"
         # urlparse splits it into a path part and a query part
         parsed_url = urlparse(self.path)
 
-        # parsed_url.path is now just "/add"
-        # parsed_url.query is now just "a=5&b=3"
-
+        # parsed_url.path is now just "/add" and parsed_url.query is now just "a=5&b=3"
         # parse_qs turns "a=5&b=3" into {'a': ['5'], 'b': ['3']}
         params = parse_qs(parsed_url.query)
 
-        # params['a'] is a LIST containing a STRING, so we grab item [0]
+        # params['a'] is a list containing a string, so we grab item [0]
         # and convert it from text to an actual number with int()
         a = int(params['a'][0])
         b = int(params['b'][0])
@@ -50,7 +47,7 @@ class MyHandler(BaseHTTPRequestHandler):
             result = None
             operation_name = "unknown"
 
-        # Build the dictionary we want to send back
+        #the way I want the results to look
         response_data = {
             "a": a,
             "b": b,
